@@ -1,0 +1,43 @@
+{% extends 'main_base.html' %}
+{% load static %}
+{% block title %}Showing the post details{% endblock %}
+{% block stylesheet %}
+{% endblock stylesheet %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-12">
+    <p>
+      <div class="float-left"><h3>Blog</h3></div>
+      <a class="btn btn-info float-right" href="{%  url 'post_details' %}">Back</a>
+    </p>
+        <div class="table-responsive-sm">
+          <table class="table table-bordered">
+            <div class="card" style="width: 70rem;">   
+            <div class="card-body">
+              <h5 class="card-title">{{post_obj.title}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Created by {{post_obj.created_by}} as on {{post_obj.pub_date}}</h6>
+              <p class="card-text">{{post_obj.body}}
+              </p>
+            </div>
+            </div>
+          </table> 
+            <h4>Comment</h4> 
+            {% for comment in post_obj.comment_set.all %}
+            <table class="table table-bordered">
+            <div class="card" style="width: 70rem;">   
+            <div class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">Comment by {{comment.comment_by}} as on {{comment.pub_date}}</h6> 
+              <p class="card-text">{{comment.body}}
+              </p>
+              <a class="btn btn-info float-left btn mr-3" href="{%  url 'comment_edit' comment.id %}">{{comment.like_status}}</a>
+            </div>
+            </div>
+          </table>  
+          {% endfor%}
+          <a class="btn btn-info float-right btn mr-3" href="{%  url 'comment_add' post_obj.id %}">Comment & liking Activities</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block javascript %}
+{% endblock javascript %}

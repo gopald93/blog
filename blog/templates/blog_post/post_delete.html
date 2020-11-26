@@ -1,0 +1,9 @@
+{% extends 'main_base.html' %}
+{% block content %}
+<br>
+    <form method="post">
+        {% csrf_token %}
+        <p>Are you sure to delete this blog which is created by? {{post_obj.created_by}} for {{post_obj.title}}</p>
+        <input  class="btn btn-primary" type="submit" value="Yes">
+    </form>
+{% endblock content %}
